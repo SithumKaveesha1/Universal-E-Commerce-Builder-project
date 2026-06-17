@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useOutletContext, Link } from 'react-router-dom';
 import axios from 'axios';
+import { Star } from 'lucide-react';
 
 const StoreFront = () => {
   const { store } = useOutletContext();
@@ -90,7 +91,11 @@ const StoreFront = () => {
               </div>
               <div className="p-4 flex flex-col flex-1">
                 <h3 className="text-sm text-gray-700 mb-1">{product.category?.name}</h3>
-                <p className="text-lg font-medium text-gray-900 mb-2 truncate">{product.name}</p>
+                <p className="text-lg font-medium text-gray-900 mb-1 truncate">{product.name}</p>
+                <div className="flex items-center mb-2">
+                  <Star size={14} fill={product.rating > 0 ? "#fbbf24" : "none"} stroke={product.rating > 0 ? "#fbbf24" : "#d1d5db"} />
+                  <span className="text-xs text-gray-500 ml-1">{product.rating ? product.rating.toFixed(1) : 'No'} rating</span>
+                </div>
                 <div className="mt-auto flex justify-between items-center">
                   <p className="text-lg font-bold" style={{ color: store.settings?.themeColor || '#000' }}>
                     {store.settings?.currency === 'USD' ? '$' : (store.settings?.currency === 'EUR' ? '€' : '')} 
