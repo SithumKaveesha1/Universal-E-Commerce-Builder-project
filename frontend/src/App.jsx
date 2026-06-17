@@ -17,6 +17,7 @@ import Cart from './pages/Cart';
 import Checkout from './pages/Checkout';
 import OrderHistory from './pages/OrderHistory';
 import AdminOrders from './pages/admin/Orders';
+import Dashboard from './pages/admin/Dashboard';
 
 // A placeholder Home component for now
 const Home = () => {
@@ -56,7 +57,7 @@ function AppRoutes() {
       
       {/* Admin Routes */}
       <Route path="/admin" element={user && (user.role === 'Admin' || user.role === 'Super Admin') ? <AdminLayout /> : <Navigate to="/login" />}>
-        <Route path="dashboard" element={<div>Dashboard content goes here</div>} />
+        <Route path="dashboard" element={<Dashboard />} />
         <Route path="create-store" element={<CreateStore />} />
         <Route path="settings" element={<StoreSettings />} />
         <Route path="categories" element={<Categories />} />
