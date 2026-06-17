@@ -2,11 +2,14 @@ import React, { useContext } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate, Link } from 'react-router-dom';
 import { AuthProvider, AuthContext } from './context/AuthContext';
 import { StoreProvider } from './context/StoreContext';
+import { ProductProvider } from './context/ProductContext';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import AdminLayout from './components/AdminLayout';
 import CreateStore from './pages/admin/CreateStore';
 import StoreSettings from './pages/admin/StoreSettings';
+import Categories from './pages/admin/Categories';
+import Products from './pages/admin/Products';
 
 // A placeholder Home component for now
 const Home = () => {
@@ -49,7 +52,8 @@ function AppRoutes() {
         <Route path="dashboard" element={<div>Dashboard content goes here</div>} />
         <Route path="create-store" element={<CreateStore />} />
         <Route path="settings" element={<StoreSettings />} />
-        <Route path="products" element={<div>Products management</div>} />
+        <Route path="categories" element={<Categories />} />
+        <Route path="products" element={<Products />} />
       </Route>
     </Routes>
   );
@@ -59,9 +63,11 @@ function App() {
   return (
     <AuthProvider>
       <StoreProvider>
-        <Router>
-          <AppRoutes />
-        </Router>
+        <ProductProvider>
+          <Router>
+            <AppRoutes />
+          </Router>
+        </ProductProvider>
       </StoreProvider>
     </AuthProvider>
   );
