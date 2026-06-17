@@ -35,6 +35,10 @@ const AdminLayout = () => {
               <ShoppingBag size={20} />
               <span>Products</span>
             </Link>
+            <Link to="/admin/orders" className="flex items-center space-x-3 px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-600 rounded-lg transition">
+              <ShoppingBag size={20} />
+              <span>Orders</span>
+            </Link>
             <Link to="/admin/settings" className="flex items-center space-x-3 px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-600 rounded-lg transition">
               <Settings size={20} />
               <span>Settings</span>
