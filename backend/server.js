@@ -5,6 +5,8 @@ import cookieParser from 'cookie-parser';
 import connectDB from './config/db.js';
 import authRoutes from './routes/authRoutes.js';
 import storeRoutes from './routes/storeRoutes.js';
+import categoryRoutes from './routes/categoryRoutes.js';
+import productRoutes from './routes/productRoutes.js';
 
 // Load env vars
 dotenv.config();
@@ -30,6 +32,8 @@ app.use(cors({
 // Mount routers
 app.use('/api/auth', authRoutes);
 app.use('/api/stores', storeRoutes);
+app.use('/api/categories', categoryRoutes);
+app.use('/api/products', productRoutes);
 
 app.get('/', (req, res) => {
   res.send('Universal E-Commerce Builder API is running...');
