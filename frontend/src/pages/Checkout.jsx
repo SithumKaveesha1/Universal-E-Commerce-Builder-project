@@ -49,11 +49,24 @@ const Checkout = () => {
         totalPrice: cartTotal
       };
 
-      const { data } = await axios.post('/orders', orderData);
-      // Redirect to order history or success page
-      navigate(`/${store.slug}/orders`);
-      // CartContext needs to be refreshed (cart is empty now)
-      window.location.reload(); 
+      const { data: orderResponse } = await axios.post('/orders', orderData);
+      
+      if (paymentMethod === 'Stripe') {
+        // Call Stripe checkout session
+        const { data: stripeSession } = await axios.post('/stripe/create-checkout-session', {
+          orderId: orderResponse._id,
+          storeSlug: store.slug,
+          domain: window.location.origin
+        });
+        
+        // Redirect to Stripe Hosted Checkout
+        window.location.href = stripeSession.url;
+      } else {
+        // Redirect to order history or success page
+        navigate(`/${store.slug}/orders`);
+        // CartContext needs to be refreshed (cart is empty now)
+        window.location.reload(); 
+      }
     } catch (err) {
       setError(err.response?.data?.message || 'Error placing order');
       setLoading(false);
