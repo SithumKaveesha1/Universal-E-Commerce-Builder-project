@@ -14,6 +14,9 @@ import StorefrontLayout from './components/StorefrontLayout';
 import StoreFront from './pages/StoreFront';
 import ProductDetails from './pages/ProductDetails';
 import Cart from './pages/Cart';
+import Checkout from './pages/Checkout';
+import OrderHistory from './pages/OrderHistory';
+import AdminOrders from './pages/admin/Orders';
 
 // A placeholder Home component for now
 const Home = () => {
@@ -58,6 +61,7 @@ function AppRoutes() {
         <Route path="settings" element={<StoreSettings />} />
         <Route path="categories" element={<Categories />} />
         <Route path="products" element={<Products />} />
+        <Route path="orders" element={<AdminOrders />} />
       </Route>
 
       {/* Customer Storefront Routes */}
@@ -66,6 +70,8 @@ function AppRoutes() {
         <Route path="products" element={<StoreFront />} />
         <Route path="product/:id" element={<ProductDetails />} />
         <Route path="cart" element={<Cart />} />
+        <Route path="checkout" element={<Checkout />} />
+        <Route path="orders" element={<OrderHistory />} />
       </Route>
     </Routes>
   );
