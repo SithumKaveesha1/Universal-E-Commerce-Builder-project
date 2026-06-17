@@ -1,8 +1,12 @@
 import React, { useContext } from 'react';
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate, Link } from 'react-router-dom';
 import { AuthProvider, AuthContext } from './context/AuthContext';
+import { StoreProvider } from './context/StoreContext';
 import Login from './pages/Login';
 import Register from './pages/Register';
+import AdminLayout from './components/AdminLayout';
+import CreateStore from './pages/admin/CreateStore';
+import StoreSettings from './pages/admin/StoreSettings';
 
 // A placeholder Home component for now
 const Home = () => {
@@ -13,6 +17,9 @@ const Home = () => {
       {user ? (
         <div>
           <p className="mb-4">Logged in as {user.name} ({user.role})</p>
+          {(user.role === 'Admin' || user.role === 'Super Admin') && (
+            <Link to="/admin/dashboard" className="px-4 py-2 bg-green-600 text-white rounded mr-2 inline-block">Go to Admin Dashboard</Link>
+          )}
           <button onClick={logout} className="px-4 py-2 bg-red-500 text-white rounded">Logout</button>
         </div>
       ) : (
@@ -36,6 +43,14 @@ function AppRoutes() {
       <Route path="/" element={<Home />} />
       <Route path="/login" element={!user ? <Login /> : <Navigate to="/" />} />
       <Route path="/register" element={!user ? <Register /> : <Navigate to="/" />} />
+      
+      {/* Admin Routes */}
+      <Route path="/admin" element={user && (user.role === 'Admin' || user.role === 'Super Admin') ? <AdminLayout /> : <Navigate to="/login" />}>
+        <Route path="dashboard" element={<div>Dashboard content goes here</div>} />
+        <Route path="create-store" element={<CreateStore />} />
+        <Route path="settings" element={<StoreSettings />} />
+        <Route path="products" element={<div>Products management</div>} />
+      </Route>
     </Routes>
   );
 }
@@ -43,9 +58,11 @@ function AppRoutes() {
 function App() {
   return (
     <AuthProvider>
-      <Router>
-        <AppRoutes />
-      </Router>
+      <StoreProvider>
+        <Router>
+          <AppRoutes />
+        </Router>
+      </StoreProvider>
     </AuthProvider>
   );
 }
