@@ -10,6 +10,7 @@ import productRoutes from './routes/productRoutes.js';
 import cartRoutes from './routes/cartRoutes.js';
 import orderRoutes from './routes/orderRoutes.js';
 import dashboardRoutes from './routes/dashboardRoutes.js';
+import stripeRoutes from './routes/stripeRoutes.js';
 
 // Load env vars
 dotenv.config();
@@ -40,6 +41,7 @@ app.use('/api/products', productRoutes);
 app.use('/api/carts', cartRoutes);
 app.use('/api/orders', orderRoutes);
 app.use('/api/dashboard', dashboardRoutes);
+app.use('/api/stripe', stripeRoutes);
 
 app.get('/', (req, res) => {
   res.send('Universal E-Commerce Builder API is running...');
