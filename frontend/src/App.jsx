@@ -10,6 +10,10 @@ import CreateStore from './pages/admin/CreateStore';
 import StoreSettings from './pages/admin/StoreSettings';
 import Categories from './pages/admin/Categories';
 import Products from './pages/admin/Products';
+import StorefrontLayout from './components/StorefrontLayout';
+import StoreFront from './pages/StoreFront';
+import ProductDetails from './pages/ProductDetails';
+import Cart from './pages/Cart';
 
 // A placeholder Home component for now
 const Home = () => {
@@ -54,6 +58,14 @@ function AppRoutes() {
         <Route path="settings" element={<StoreSettings />} />
         <Route path="categories" element={<Categories />} />
         <Route path="products" element={<Products />} />
+      </Route>
+
+      {/* Customer Storefront Routes */}
+      <Route path="/:storeSlug" element={<StorefrontLayout />}>
+        <Route index element={<StoreFront />} />
+        <Route path="products" element={<StoreFront />} />
+        <Route path="product/:id" element={<ProductDetails />} />
+        <Route path="cart" element={<Cart />} />
       </Route>
     </Routes>
   );
