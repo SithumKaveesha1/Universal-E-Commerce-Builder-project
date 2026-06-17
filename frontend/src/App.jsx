@@ -15,6 +15,7 @@ import StoreFront from './pages/StoreFront';
 import ProductDetails from './pages/ProductDetails';
 import Cart from './pages/Cart';
 import Checkout from './pages/Checkout';
+import CheckoutSuccess from './pages/CheckoutSuccess';
 import OrderHistory from './pages/OrderHistory';
 import AdminOrders from './pages/admin/Orders';
 import Dashboard from './pages/admin/Dashboard';
@@ -72,6 +73,7 @@ function AppRoutes() {
         <Route path="product/:id" element={<ProductDetails />} />
         <Route path="cart" element={<Cart />} />
         <Route path="checkout" element={<Checkout />} />
+        <Route path="checkout-success" element={<CheckoutSuccess />} />
         <Route path="orders" element={<OrderHistory />} />
       </Route>
     </Routes>
